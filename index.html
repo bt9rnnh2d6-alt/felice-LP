@@ -849,9 +849,135 @@
       .hero-catch { font-size: 1.8rem; }
       .pricing-grid { grid-template-columns: 1fr; }
     }
+
+    /* ─────────────────────────────────────────
+       白い花びらアニメーション
+    ───────────────────────────────────────── */
+    /* 花びら：白レイヤー（暗い背景で見える） */
+    #petal-white {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+      mix-blend-mode: screen;  /* 白背景では消え、暗い背景では白く浮かぶ */
+    }
+    /* 花びら：タンレイヤー（白い背景で見える） */
+    #petal-tan {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+      mix-blend-mode: multiply; /* 白背景ではタン色に、暗い背景では消える */
+    }
+    /* テキスト・画像・ボタンなどコンテンツを花びらより前面に */
+    .header,
+    .container,
+    .container-sm,
+    .hero-inner,
+    .masonry-outer,
+    .record-number,
+    .order-section > div,
+    .footer > * {
+      position: relative;
+      z-index: 10;
+    }
+    .petal {
+      position: absolute;
+      top: -80px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
+      user-select: none;
+      animation: petalFall linear infinite;
+      will-change: transform, opacity;
+    }
+    @keyframes petalFall {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+        opacity: 0;
+      }
+      8%  { opacity: 1; }
+      25% { transform: translateY(25vh)  translateX(var(--swing, 60px))  rotate(135deg) scale(.95); }
+      50% { transform: translateY(50vh)  translateX(0)                   rotate(270deg) scale(.85); }
+      75% { transform: translateY(75vh)  translateX(calc(var(--swing, 60px) * -0.6)) rotate(405deg) scale(.8); }
+      90% { opacity: .6; }
+      100% {
+        transform: translateY(110vh) translateX(0) rotate(540deg) scale(.7);
+        opacity: 0;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       スクロールアニメーション
+    ───────────────────────────────────────── */
+    /* 初期状態：非表示 */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(56px);
+      transition: opacity 1.1s cubic-bezier(.22,.61,.36,1), transform 1.1s cubic-bezier(.22,.61,.36,1);
+    }
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* 遅延バリアント：間隔を広めに */
+    .fade-up.delay-1 { transition-delay: .25s; }
+    .fade-up.delay-2 { transition-delay: .5s; }
+    .fade-up.delay-3 { transition-delay: .75s; }
+    .fade-up.delay-4 { transition-delay: 1s; }
+
+    /* 左から */
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-48px);
+      transition: opacity 1.1s cubic-bezier(.22,.61,.36,1), transform 1.1s cubic-bezier(.22,.61,.36,1);
+    }
+    .fade-left.is-visible { opacity: 1; transform: translateX(0); }
+
+    /* 右から */
+    .fade-right {
+      opacity: 0;
+      transform: translateX(48px);
+      transition: opacity 1.1s cubic-bezier(.22,.61,.36,1), transform 1.1s cubic-bezier(.22,.61,.36,1);
+    }
+    .fade-right.is-visible { opacity: 1; transform: translateX(0); }
+    .fade-right.delay-1 { transition-delay: .25s; }
+    .fade-right.delay-2 { transition-delay: .5s; }
+    .fade-right.delay-3 { transition-delay: .75s; }
+
+    /* ヒーローテキスト：ゆっくりフワッと */
+    .hero-copy, .hero-cta, .hero-note {
+      animation: heroFadeIn 1.6s cubic-bezier(.22,.61,.36,1) both;
+    }
+    .hero-cta   { animation-delay: .8s; }
+    .hero-note  { animation-delay: 1.3s; }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 数字カウントアップ用 */
+    .record-figure { transition: opacity .5s; }
+
+    /* カードホバー強調 */
+    .empathy-card {
+      transition: box-shadow .3s ease, transform .3s ease;
+    }
+    .empathy-card:hover {
+      box-shadow: 0 12px 32px rgba(61,43,31,.12);
+      transform: translateY(-4px);
+    }
+    .pricing-card {
+      transition: box-shadow .3s ease, transform .3s ease;
+    }
   </style>
 </head>
 <body>
+
+  <!-- 花びらオーバーレイ（白：暗い背景用 / タン：白い背景用） -->
+  <div id="petal-white" aria-hidden="true"></div>
+  <div id="petal-tan"   aria-hidden="true"></div>
 
   <!-- ===================== HEADER ===================== -->
   <header class="header">
@@ -859,7 +985,7 @@
       Felice
       <span>Clay Cake Studio</span>
     </div>
-    <a href="https://felice3674.base.shop/" target="_blank" class="header-cta">オーダーはこちら</a>
+    <a href="https://minne.com/@felice-3674?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="header-cta">オーダー</a>
   </header>
 
 
@@ -900,11 +1026,11 @@
       </div>
 
       <div class="hero-cta">
-        <a href="https://felice3674.base.shop/" target="_blank" class="btn btn-primary btn-arrow">
-          オーダーはこちら
-        </a>
         <a href="https://www.instagram.com/felice.fakecake?igsh=ZGdzejUwdWFsOW40&utm_source=qr" target="_blank" class="btn btn-outline">
           まずは相談する
+        </a>
+        <a href="https://minne.com/@felice-3674?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="btn btn-primary">
+          オーダー
         </a>
       </div>
       <p class="hero-note">制作実績 700件以上</p>
@@ -920,14 +1046,14 @@
   <!-- ===================== ② EMPATHY ===================== -->
   <section class="section section-white">
     <div class="container">
-      <span class="label">For You</span>
-      <div class="ornament"><div class="ornament-diamond"></div></div>
-      <h2 class="section-title">
+      <span class="label fade-up">For You</span>
+      <div class="ornament fade-up delay-1"><div class="ornament-diamond"></div></div>
+      <h2 class="section-title fade-up delay-2">
         こんなお悩みは<br>ありませんか？
       </h2>
 
       <div class="empathy-grid">
-        <div class="empathy-card">
+        <div class="empathy-card fade-left">
           <div class="empathy-num serif-en">01</div>
           <p class="empathy-title">
             記念日を<br>もっとおしゃれに残したい
@@ -936,7 +1062,7 @@
             せっかくのバースデーや記念日。写真を見返したとき、何年経ってもその日の特別さを感じられるものを残したい、と思っていませんか？
           </p>
         </div>
-        <div class="empathy-card">
+        <div class="empathy-card fade-right">
           <div class="empathy-num serif-en">02</div>
           <p class="empathy-title">
             市販ケーキでは<br>物足りない
@@ -957,41 +1083,41 @@
   <!-- ===================== ③ SOLUTION ===================== -->
   <section class="section section-ultra">
     <div class="container">
-      <span class="label">Solution</span>
-      <div class="ornament"><div class="ornament-diamond"></div></div>
-      <h2 class="section-title">
+      <span class="label fade-up">Solution</span>
+      <div class="ornament fade-up delay-1"><div class="ornament-diamond"></div></div>
+      <h2 class="section-title fade-up delay-2">
         世界に一つだけの<br>フルオーダークレイケーキ
       </h2>
 
       <div class="solution-layout">
-        <div class="solution-image">
+        <div class="solution-image fade-left">
           <div class="img-placeholder img-placeholder-2">
             <span class="img-placeholder-icon">photo</span>
           </div>
         </div>
 
         <div class="solution-points">
-          <div class="solution-point">
+          <div class="solution-point fade-right delay-1">
             <div class="solution-point-icon">01</div>
             <p class="solution-point-title">フルオーダー — すべてあなたの想いで</p>
             <p class="solution-point-text">
               テーマカラー・デザイン・装飾のすべてをご要望に合わせてお作りします。お子様の好きなキャラクターから、大人上品なウェディングスタイルまで自由自在。
             </p>
           </div>
-          <div class="solution-point">
+          <div class="solution-point fade-right delay-2">
             <div class="solution-point-icon">02</div>
             <p class="solution-point-title">写真映え — 撮るたびに輝く</p>
             <p class="solution-point-text">
               生ケーキとは一線を画す、クレイ素材ならではの発色と質感。どんなアングルからも美しく、記念撮影を格段に引き立てます。
             </p>
           </div>
-          <div class="solution-point">
+          <div class="solution-point fade-right delay-3">
             <div class="solution-point-icon">03</div>
             <p class="solution-point-title">永遠に残る — 変わらない美しさ</p>
             <p class="solution-point-text">
               腐ることなく、ずっと飾り続けられます。毎年の記念日に取り出せる、家族の宝物になります。
             </p>
-          </div>
+          </div><!-- solution-point fade-right delay-3 placeholder -->
         </div>
       </div>
     </div>
@@ -1085,28 +1211,28 @@
   <!-- ===================== ⑤ SCENES ===================== -->
   <section class="section section-white">
     <div class="container">
-      <span class="label">Scenes</span>
-      <div class="ornament"><div class="ornament-diamond"></div></div>
-      <h2 class="section-title">
+      <span class="label fade-up">Scenes</span>
+      <div class="ornament fade-up delay-1"><div class="ornament-diamond"></div></div>
+      <h2 class="section-title fade-up delay-2">
         さまざまなシーンに<br>寄り添います
       </h2>
 
       <div class="scenes-grid">
-        <div class="scene-card">
+        <div class="scene-card fade-up delay-1">
           <div class="img-placeholder img-placeholder-3" style="position:absolute;inset:0;border-radius:4px;"></div>
           <div class="scene-overlay">
             <p class="scene-en">Birthday</p>
             <p class="scene-ja">バースデー</p>
           </div>
         </div>
-        <div class="scene-card">
+        <div class="scene-card fade-up delay-2">
           <div class="img-placeholder img-placeholder-5" style="position:absolute;inset:0;border-radius:4px;"></div>
           <div class="scene-overlay">
             <p class="scene-en">Wedding</p>
             <p class="scene-ja">ウェディング</p>
           </div>
         </div>
-        <div class="scene-card">
+        <div class="scene-card fade-up delay-3">
           <div class="img-placeholder img-placeholder-6" style="position:absolute;inset:0;border-radius:4px;"></div>
           <div class="scene-overlay">
             <p class="scene-en">Photo Studio</p>
@@ -1121,16 +1247,16 @@
   <!-- ===================== ⑥ PRICING ===================== -->
   <section class="section section-ultra">
     <div class="container">
-      <span class="label">Price</span>
-      <div class="ornament"><div class="ornament-diamond"></div></div>
-      <h2 class="section-title">
+      <span class="label fade-up">Price</span>
+      <div class="ornament fade-up delay-1"><div class="ornament-diamond"></div></div>
+      <h2 class="section-title fade-up delay-2">
         ご予算に合わせて<br>お選びいただけます
       </h2>
 
       <div class="pricing-grid">
 
         <!-- 完成品 -->
-        <div class="pricing-card">
+        <div class="pricing-card fade-up delay-1">
           <div class="pricing-head">
             <p class="pricing-type-en">Ready-made</p>
             <p class="pricing-type-ja">完成品</p>
@@ -1146,11 +1272,11 @@
         </div>
 
         <!-- セミオーダー -->
-        <div class="pricing-card pricing-card--featured">
-          <div class="pricing-head pricing-head--featured">
-            <p class="pricing-type-en pricing-type-en--white">Semi-order</p>
-            <p class="pricing-type-ja pricing-type-ja--white">セミオーダー</p>
-            <div class="pricing-price pricing-price--white serif-en">¥18,000<span>〜</span></div>
+        <div class="pricing-card fade-up delay-2">
+          <div class="pricing-head">
+            <p class="pricing-type-en">Semi-order</p>
+            <p class="pricing-type-ja">セミオーダー</p>
+            <div class="pricing-price serif-en">¥18,000<span>〜</span></div>
           </div>
           <div class="pricing-body">
             <ul class="pricing-features">
@@ -1162,17 +1288,17 @@
         </div>
 
         <!-- フルオーダー -->
-        <div class="pricing-card">
-          <div class="pricing-head">
-            <p class="pricing-type-en">Full-order</p>
-            <p class="pricing-type-ja">フルオーダー</p>
-            <div class="pricing-price serif-en">¥30,000<span>〜</span></div>
+        <div class="pricing-card pricing-card--featured fade-up delay-3">
+          <div class="pricing-head pricing-head--featured">
+            <p class="pricing-type-en pricing-type-en--white">Full-order</p>
+            <p class="pricing-type-ja pricing-type-ja--white">フルオーダー</p>
+            <div class="pricing-price pricing-price--white serif-en" style="font-size:1.6rem; letter-spacing:.06em;">要相談</div>
           </div>
           <div class="pricing-body">
             <ul class="pricing-features">
               <li>デザイン・サイズ・カラーすべてオーダーメイド</li>
               <li>イメージやこだわりを自由にご相談</li>
-              <li>Instagram DM / BASE より承ります</li>
+              <li>Instagram DMよりご相談</li>
             </ul>
           </div>
         </div>
@@ -1180,7 +1306,7 @@
       </div>
 
       <p class="pricing-note">
-        ※ 価格はすべて税込・送料別です。詳細はお気軽にご相談ください。
+        ※ 表示価格はすべて参考値です。詳細はお気軽にご相談ください。
       </p>
     </div>
   </section>
@@ -1201,8 +1327,8 @@
 
       <div class="order-links">
         <div>
-          <a href="https://www.instagram.com/felice.fakecake?igsh=ZGdzejUwdWFsOW40&utm_source=qr" target="_blank" class="btn btn-primary btn-arrow" style="min-width:220px;">
-            ご相談はこちら（Instagram）
+          <a href="https://www.instagram.com/felice.fakecake?igsh=ZGdzejUwdWFsOW40&utm_source=qr" target="_blank" class="btn btn-outline" style="min-width:220px;">
+            相談する（Instagram）
           </a>
           <span class="btn-shop-label">DM にてご相談承ります</span>
         </div>
@@ -1210,8 +1336,8 @@
         <span class="order-links-divider">or</span>
 
         <div>
-          <a href="https://felice3674.base.shop/" target="_blank" class="btn btn-outline" style="min-width:220px;">
-            BASE でオーダーする
+          <a href="https://minne.com/@felice-3674?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="btn btn-primary" style="min-width:220px;">
+            オーダー（minne）
           </a>
           <span class="btn-shop-label">オンラインストアへ</span>
         </div>
@@ -1221,8 +1347,8 @@
         その他の販売サイト
       </p>
       <div class="order-shops">
-        <a href="https://minne.com/@felice-3674?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="btn-shop">minne</a>
         <a href="https://www.creema.jp/c/felice_fakecake/item/onsale?utm_source=ig&utm_medium=social&utm_content=link_in_bio" target="_blank" class="btn-shop">Creema</a>
+        <a href="https://felice3674.base.shop/" target="_blank" class="btn-shop">BASE</a>
       </div>
 
       <p class="order-note-text">
@@ -1247,6 +1373,66 @@
     <p class="footer-copy">© 2024 Felice Clay Cake Studio. All Rights Reserved.</p>
   </footer>
 
+
+  <script>
+    // ── 花びら生成（白レイヤー＋タンレイヤー） ──
+    (function () {
+      var whiteCanvas = document.getElementById('petal-white');
+      var tanCanvas   = document.getElementById('petal-tan');
+      var shapes = ['✿', '❀', '✾', '❁', '✽'];
+      var count  = 12; // 各レイヤーの枚数（白12＋タン12＝計24枚）
+
+      function rand(min, max) { return Math.random() * (max - min) + min; }
+
+      function spawnPetals(canvas, color, shadow) {
+        for (var i = 0; i < count; i++) {
+          var el = document.createElement('span');
+          el.className = 'petal';
+          el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+
+          var size     = rand(8, 24);
+          var left     = rand(0, 100);
+          var duration = rand(10, 22);
+          var delay    = rand(0, duration);
+          var swing    = rand(40, 120) * (Math.random() > .5 ? 1 : -1);
+
+          el.style.cssText = [
+            'font-size:'        + size + 'px',
+            'left:'             + left + '%',
+            'animation-duration:' + duration + 's',
+            'animation-delay:-' + delay + 's',
+            'color:'            + color,
+            'filter: drop-shadow(0 1px 3px ' + shadow + ')',
+          ].join(';');
+          el.style.setProperty('--swing', swing + 'px');
+
+          canvas.appendChild(el);
+        }
+      }
+
+      // 白：暗い背景（ヒーロー・実績・フッター）で浮かび上がる
+      spawnPetals(whiteCanvas, 'rgba(255,255,255,0.85)', 'rgba(255,255,255,0.3)');
+      // タン：白い背景（共感・解決・シーン・価格）で浮かび上がる
+      spawnPetals(tanCanvas,   'rgba(210,180,140,0.9)',  'rgba(180,140,90,0.25)');
+    })();
+  </script>
+
+  <script>
+    // ── スクロールアニメーション（Intersection Observer） ──
+    (function () {
+      var targets = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
+      if (!targets.length) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
 
   <script>
     // ── ヒーロー動画：確実に自動再生 ──
