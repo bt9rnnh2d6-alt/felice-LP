@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Italiana&family=Noto+Serif+JP:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload critical hero poster (video fallback) and solution image -->
+  <link rel="preload" as="image" href="AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="LINE_ALBUM_ケーキ_260403_3.webp" type="image/webp">
   <style>
 
     /* ── Reset ── */
@@ -675,7 +679,7 @@
   <!-- ═══════════ ① HERO ═══════════ -->
   <section class="hero">
     <div class="hero-bg">
-      <video id="heroVideo" src="hero.mp4" autoplay muted loop playsinline preload="auto"
+      <video id="heroVideo" src="hero.mp4" autoplay muted loop playsinline preload="metadata"
              poster="AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg"></video>
     </div>
 
@@ -749,7 +753,7 @@
 
       <div class="solution-layout">
         <div class="solution-image fade-left">
-          <img src="LINE_ALBUM_ケーキ_260403_3.jpg" alt="世界に一つだけのクレイケーキ">
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_3.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_3.jpg" alt="世界に一つだけのクレイケーキ" loading="eager" decoding="async" fetchpriority="high"></picture>
         </div>
         <div class="solution-points">
           <div class="solution-point fade-right delay-1">
@@ -799,79 +803,79 @@
       <div class="masonry-track">
         <!-- col 1 (10 unique) -->
         <div class="masonry-col">
-          <img src="AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg"  alt="制作実績">
-          <img src="49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.jpg"  alt="制作実績">
-          <img src="C9D753F9-B537-4319-9048-CC3AE9D389EC.jpg"  alt="制作実績">
-          <img src="1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.jpg"  alt="制作実績">
-          <img src="3ADB4CAB-09D1-4598-B3BB-E1CD3FDE01C2.jpg"  alt="制作実績">
-          <img src="S__29360139.jpg"                            alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_1.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_5.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ウェディング系_260403_4.jpg"      alt="制作実績">
-          <img src="LINE_ALBUM_ウェディング系_260403_5.jpg"      alt="制作実績">
+          <picture><source srcset="AF62A4D7-4936-40CD-A49C-6EF85D527675.webp" type="image/webp"><img src="AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.webp" type="image/webp"><img src="49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="C9D753F9-B537-4319-9048-CC3AE9D389EC.webp" type="image/webp"><img src="C9D753F9-B537-4319-9048-CC3AE9D389EC.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.webp" type="image/webp"><img src="1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="3ADB4CAB-09D1-4598-B3BB-E1CD3FDE01C2.webp" type="image/webp"><img src="3ADB4CAB-09D1-4598-B3BB-E1CD3FDE01C2.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="S__29360139.webp" type="image/webp"><img src="S__29360139.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_1.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_1.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_5.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_5.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_4.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_4.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_5.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_5.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
           <!-- duplicate for loop -->
-          <img src="AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg"  alt="">
-          <img src="49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.jpg"  alt="">
-          <img src="C9D753F9-B537-4319-9048-CC3AE9D389EC.jpg"  alt="">
-          <img src="1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.jpg"  alt="">
-          <img src="3ADB4CAB-09D1-4598-B3BB-E1CD3FDE01C2.jpg"  alt="">
-          <img src="S__29360139.jpg"                            alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_1.jpg"             alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_5.jpg"             alt="">
-          <img src="LINE_ALBUM_ウェディング系_260403_4.jpg"      alt="">
-          <img src="LINE_ALBUM_ウェディング系_260403_5.jpg"      alt="">
+          <picture><source srcset="AF62A4D7-4936-40CD-A49C-6EF85D527675.webp" type="image/webp"><img src="AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.webp" type="image/webp"><img src="49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="C9D753F9-B537-4319-9048-CC3AE9D389EC.webp" type="image/webp"><img src="C9D753F9-B537-4319-9048-CC3AE9D389EC.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.webp" type="image/webp"><img src="1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="3ADB4CAB-09D1-4598-B3BB-E1CD3FDE01C2.webp" type="image/webp"><img src="3ADB4CAB-09D1-4598-B3BB-E1CD3FDE01C2.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="S__29360139.webp" type="image/webp"><img src="S__29360139.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_1.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_1.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_5.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_5.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_4.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_4.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_5.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_5.jpg" alt="" loading="lazy" decoding="async"></picture>
         </div>
         <!-- col 2 (10 unique) -->
         <div class="masonry-col">
-          <img src="BF62B532-0284-47EA-8FA2-7EE608922D63.jpg"  alt="制作実績">
-          <img src="B71941BF-9991-46FB-9FD8-FB736652465C.jpg"  alt="制作実績">
-          <img src="A7E31EED-A5C1-42FB-BC82-48C70A947250.jpg"  alt="制作実績">
-          <img src="4B7F715A-7250-4AB3-9197-AAFF8597B422.jpg"  alt="制作実績">
-          <img src="21A632EE-0AC2-4FE7-BD93-2260366D91C1.jpg"  alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_2.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_6.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_7.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_9.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ウェディング系_260403_1.jpg"      alt="制作実績">
+          <picture><source srcset="BF62B532-0284-47EA-8FA2-7EE608922D63.webp" type="image/webp"><img src="BF62B532-0284-47EA-8FA2-7EE608922D63.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="B71941BF-9991-46FB-9FD8-FB736652465C.webp" type="image/webp"><img src="B71941BF-9991-46FB-9FD8-FB736652465C.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="A7E31EED-A5C1-42FB-BC82-48C70A947250.webp" type="image/webp"><img src="A7E31EED-A5C1-42FB-BC82-48C70A947250.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="4B7F715A-7250-4AB3-9197-AAFF8597B422.webp" type="image/webp"><img src="4B7F715A-7250-4AB3-9197-AAFF8597B422.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="21A632EE-0AC2-4FE7-BD93-2260366D91C1.webp" type="image/webp"><img src="21A632EE-0AC2-4FE7-BD93-2260366D91C1.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_2.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_2.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_6.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_6.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_7.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_7.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_9.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_9.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_1.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_1.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
           <!-- duplicate for loop -->
-          <img src="BF62B532-0284-47EA-8FA2-7EE608922D63.jpg"  alt="">
-          <img src="B71941BF-9991-46FB-9FD8-FB736652465C.jpg"  alt="">
-          <img src="A7E31EED-A5C1-42FB-BC82-48C70A947250.jpg"  alt="">
-          <img src="4B7F715A-7250-4AB3-9197-AAFF8597B422.jpg"  alt="">
-          <img src="21A632EE-0AC2-4FE7-BD93-2260366D91C1.jpg"  alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_2.jpg"             alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_6.jpg"             alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_7.jpg"             alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_9.jpg"             alt="">
-          <img src="LINE_ALBUM_ウェディング系_260403_1.jpg"      alt="">
+          <picture><source srcset="BF62B532-0284-47EA-8FA2-7EE608922D63.webp" type="image/webp"><img src="BF62B532-0284-47EA-8FA2-7EE608922D63.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="B71941BF-9991-46FB-9FD8-FB736652465C.webp" type="image/webp"><img src="B71941BF-9991-46FB-9FD8-FB736652465C.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="A7E31EED-A5C1-42FB-BC82-48C70A947250.webp" type="image/webp"><img src="A7E31EED-A5C1-42FB-BC82-48C70A947250.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="4B7F715A-7250-4AB3-9197-AAFF8597B422.webp" type="image/webp"><img src="4B7F715A-7250-4AB3-9197-AAFF8597B422.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="21A632EE-0AC2-4FE7-BD93-2260366D91C1.webp" type="image/webp"><img src="21A632EE-0AC2-4FE7-BD93-2260366D91C1.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_2.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_2.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_6.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_6.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_7.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_7.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_9.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_9.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_1.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_1.jpg" alt="" loading="lazy" decoding="async"></picture>
         </div>
         <!-- col 3 (11 unique) -->
         <div class="masonry-col">
-          <img src="BD413E89-8AC9-4EF4-BC37-9E172D2649BA.jpg"  alt="制作実績">
-          <img src="C345F8F3-2243-4224-970F-8B79F7663596.jpg"  alt="制作実績">
-          <img src="FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.jpg"  alt="制作実績">
-          <img src="94EF2D33-F990-472C-913D-A5C52B54AF7A.jpg"  alt="制作実績">
-          <img src="C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.jpg"  alt="制作実績">
-          <img src="01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.jpg"  alt="制作実績">
-          <img src="S__253698064.jpg"                           alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_4.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_8.jpg"             alt="制作実績">
-          <img src="LINE_ALBUM_ケーキ_260403_10.jpg"            alt="制作実績">
-          <img src="LINE_ALBUM_ウェディング系_260403_2.jpg"      alt="制作実績">
-          <img src="LINE_ALBUM_ウェディング系_260403_3.jpg"      alt="制作実績">
+          <picture><source srcset="BD413E89-8AC9-4EF4-BC37-9E172D2649BA.webp" type="image/webp"><img src="BD413E89-8AC9-4EF4-BC37-9E172D2649BA.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="C345F8F3-2243-4224-970F-8B79F7663596.webp" type="image/webp"><img src="C345F8F3-2243-4224-970F-8B79F7663596.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.webp" type="image/webp"><img src="FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="94EF2D33-F990-472C-913D-A5C52B54AF7A.webp" type="image/webp"><img src="94EF2D33-F990-472C-913D-A5C52B54AF7A.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.webp" type="image/webp"><img src="C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.webp" type="image/webp"><img src="01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="S__253698064.webp" type="image/webp"><img src="S__253698064.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_4.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_4.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_8.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_8.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_10.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_10.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_2.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_2.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_3.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_3.jpg" alt="制作実績" loading="lazy" decoding="async"></picture>
           <!-- duplicate for loop -->
-          <img src="BD413E89-8AC9-4EF4-BC37-9E172D2649BA.jpg"  alt="">
-          <img src="C345F8F3-2243-4224-970F-8B79F7663596.jpg"  alt="">
-          <img src="FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.jpg"  alt="">
-          <img src="94EF2D33-F990-472C-913D-A5C52B54AF7A.jpg"  alt="">
-          <img src="C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.jpg"  alt="">
-          <img src="01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.jpg"  alt="">
-          <img src="S__253698064.jpg"                           alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_4.jpg"             alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_8.jpg"             alt="">
-          <img src="LINE_ALBUM_ケーキ_260403_10.jpg"            alt="">
-          <img src="LINE_ALBUM_ウェディング系_260403_2.jpg"      alt="">
-          <img src="LINE_ALBUM_ウェディング系_260403_3.jpg"      alt="">
+          <picture><source srcset="BD413E89-8AC9-4EF4-BC37-9E172D2649BA.webp" type="image/webp"><img src="BD413E89-8AC9-4EF4-BC37-9E172D2649BA.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="C345F8F3-2243-4224-970F-8B79F7663596.webp" type="image/webp"><img src="C345F8F3-2243-4224-970F-8B79F7663596.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.webp" type="image/webp"><img src="FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="94EF2D33-F990-472C-913D-A5C52B54AF7A.webp" type="image/webp"><img src="94EF2D33-F990-472C-913D-A5C52B54AF7A.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.webp" type="image/webp"><img src="C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.webp" type="image/webp"><img src="01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="S__253698064.webp" type="image/webp"><img src="S__253698064.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_4.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_4.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_8.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_8.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ケーキ_260403_10.webp" type="image/webp"><img src="LINE_ALBUM_ケーキ_260403_10.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_2.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_2.jpg" alt="" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_3.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_3.jpg" alt="" loading="lazy" decoding="async"></picture>
         </div>
       </div>
     </div>
@@ -889,21 +893,21 @@
 
       <div class="scenes-grid">
         <div class="scene-card fade-up delay-1">
-          <img src="686E89D3-07BB-4AE6-A220-17829DD1C71A.jpg" alt="バースデー">
+          <picture><source srcset="686E89D3-07BB-4AE6-A220-17829DD1C71A.webp" type="image/webp"><img src="686E89D3-07BB-4AE6-A220-17829DD1C71A.jpg" alt="バースデー" loading="lazy" decoding="async"></picture>
           <div class="scene-overlay">
             <p class="scene-en">Birthday</p>
             <p class="scene-ja">バースデー</p>
           </div>
         </div>
         <div class="scene-card fade-up delay-2">
-          <img src="LINE_ALBUM_ウェディング系_260403_6.jpg" alt="ウェディング">
+          <picture><source srcset="LINE_ALBUM_ウェディング系_260403_6.webp" type="image/webp"><img src="LINE_ALBUM_ウェディング系_260403_6.jpg" alt="ウェディング" loading="lazy" decoding="async"></picture>
           <div class="scene-overlay">
             <p class="scene-en">Wedding</p>
             <p class="scene-ja">ウェディング</p>
           </div>
         </div>
         <div class="scene-card fade-up delay-3">
-          <img src="09695D9F-30AE-40CE-A2CF-4BCAB9FB836A.jpg" alt="フォトスタジオ">
+          <picture><source srcset="09695D9F-30AE-40CE-A2CF-4BCAB9FB836A.webp" type="image/webp"><img src="09695D9F-30AE-40CE-A2CF-4BCAB9FB836A.jpg" alt="フォトスタジオ" loading="lazy" decoding="async"></picture>
           <div class="scene-overlay">
             <p class="scene-en">Photo Studio</p>
             <p class="scene-ja">フォトスタジオ</p>
