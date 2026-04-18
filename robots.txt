@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block internal working folders
+Disallow: /_originals/
+
+Sitemap: https://felice-fakecake.com/sitemap.xml
