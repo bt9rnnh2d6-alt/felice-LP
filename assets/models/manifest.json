@@ -1,0 +1,69 @@
+{
+  "tier": [
+    {
+      "id": "round",
+      "name": "ラウンド",
+      "file": "assets/models/tier/round.glb"
+    }
+  ],
+  "berry": [
+    {
+      "id": "blackberry",
+      "name": "ブラックベリー",
+      "file": "assets/models/berry/blackberry.glb",
+      "size": 0.42
+    },
+    {
+      "id": "blueberry",
+      "name": "ブルーベリー",
+      "file": "assets/models/berry/blueberry.glb",
+      "size": 0.42
+    },
+    {
+      "id": "strawberry",
+      "name": "苺",
+      "file": "assets/models/berry/strawberry.glb",
+      "size": 0.42
+    }
+  ],
+  "flower": [
+    {
+      "id": "rose",
+      "name": "バラ",
+      "file": "assets/models/flower/rose.glb",
+      "size": 0.55
+    }
+  ],
+  "macaron": [
+    {
+      "id": "macaron",
+      "name": "マカロン",
+      "file": "assets/models/macaron/macaron.glb",
+      "size": 0.55
+    }
+  ],
+  "ribbon": [
+    {
+      "id": "bow",
+      "name": "リボン",
+      "file": "assets/models/ribbon/bow.glb",
+      "size": 0.95
+    }
+  ],
+  "topper": [
+    {
+      "id": "topper",
+      "name": "トッパー",
+      "file": "assets/models/topper/topper.glb",
+      "size": 1.5
+    }
+  ],
+  "pearl": [
+    {
+      "id": "pearl",
+      "name": "パール",
+      "file": "assets/models/pearl/pearl.glb",
+      "size": 0.16
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Felice</title>
+  <desc id="desc">Felice Clay Cake Studio favicon</desc>
+  <defs>
+    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fffdf9"/>
+      <stop offset="0.55" stop-color="#fdfbf7"/>
+      <stop offset="1" stop-color="#f4ead9"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="14" y1="8" x2="50" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6d4a8"/>
+      <stop offset="0.48" stop-color="#c9a96a"/>
+      <stop offset="1" stop-color="#a8845a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" fill="#fdfbf7"/>
+  <rect x="5" y="5" width="54" height="54" rx="17" fill="url(#bg)"/>
+  <rect x="7.5" y="7.5" width="49" height="49" rx="15.5" fill="none" stroke="url(#gold)" stroke-width="1.4"/>
+  <text x="31.5" y="44"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="43"
+        font-style="italic"
+        font-weight="400"
+        fill="#6b4f38">f</text>
+</svg>
