@@ -1,0 +1,14 @@
+# 社外秘・営業データ（公開リポジトリのため厳守）
+sales/
+*.pdf
+*.docx
+
+# Claude Code / エージェント設定（営業手順を含むため非公開）
+.claude/
+.agents/
+skills-lock.json
+CLAUDE.local.md
+
+# OS
+Thumbs.db
+desktop.ini
