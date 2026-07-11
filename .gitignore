@@ -1,7 +1,11 @@
 # 社外秘・営業データ（公開リポジトリのため厳守）
 sales/
+docs/
 *.pdf
 *.docx
+
+# 写真の撮影元データ（EXIF等を含むためローカル保管のみ・配信は images/ を使用）
+_originals/
 
 # Claude Code / エージェント設定（営業手順を含むため非公開）
 .claude/
