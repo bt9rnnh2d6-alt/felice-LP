@@ -31,4 +31,15 @@
       <image:caption>クレイケーキによる撮影ディスプレイ</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://felice-fakecake.com/for-studio</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://felice-fakecake.com/images/original/LINE_ALBUM_ウェディング系_260403_6.jpg</image:loc>
+      <image:title>フォトスタジオ様向け 撮影用クレイケーキ制作</image:title>
+      <image:caption>フォトスタジオ・写真館向けクレイケーキ・小物のフルオーダー制作</image:caption>
+    </image:image>
+  </url>
 </urlset>
