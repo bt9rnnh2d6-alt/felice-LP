@@ -350,6 +350,62 @@
       line-height: 2.2; letter-spacing: .06em;
     }
 
+    /* ── GALLERY (制作例ギャラリー) ── */
+    .gallery-section {
+      position: relative;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 50%, rgba(255,255,255,.12) 0%, transparent 60%),
+        linear-gradient(160deg, #d2b48c 0%, #b58a57 100%);
+      padding: var(--sec) 0;
+      overflow: hidden;
+    }
+    .section-title--white { color: var(--white); text-shadow: 0 2px 24px rgba(20,8,0,.22); }
+    .gallery-lead {
+      margin-top: 36px; text-align: center;
+      font-size: .88rem; font-weight: 300; color: rgba(255,255,255,.88);
+      line-height: 2.4; letter-spacing: .08em;
+    }
+    .gallery-note {
+      margin-top: 56px; text-align: center; padding: 0 32px;
+      font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.82);
+      letter-spacing: .08em; line-height: 2.2;
+    }
+    .gallery-note a {
+      color: var(--white); border-bottom: 1px solid rgba(255,255,255,.45);
+      padding-bottom: 2px; transition: border-color .45s var(--ease-lux);
+    }
+    .gallery-note a:hover { border-color: var(--white); }
+
+    /* ── Masonry scroll ── */
+    .masonry-outer {
+      margin-top: 80px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image:         linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+      height: 560px;
+    }
+    /* align-items: flex-start 必須 — stretch だと translateY(-50%) の基準が
+       最長列の高さに揃い、短い列がループの折り返しで大きく跳ぶ */
+    .masonry-track { display: flex; gap: 20px; width: 100%; padding: 0 20px; align-items: flex-start; }
+    .masonry-col {
+      flex: 1; display: flex; flex-direction: column; gap: 20px;
+      /* 列末尾には gap が付かないため padding で1つ分補い、
+         -50% を「複製1周分」にピクセル一致させる */
+      padding-bottom: 20px;
+      animation: masonryUp linear infinite; will-change: transform;
+    }
+    .masonry-col:nth-child(1) { animation-duration: 38s; }
+    .masonry-col:nth-child(2) { animation-duration: 46s; animation-delay: -6s; }
+    .masonry-col:nth-child(3) { animation-duration: 41s; animation-delay: -14s; }
+    @keyframes masonryUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+    .masonry-col img {
+      /* height: auto 必須 — width/height 属性の height がそのまま効くと
+         画像が固定pxに引き伸ばされる（属性は読み込み前の領域確保用） */
+      width: 100%; height: auto; border-radius: 2px; display: block; object-fit: cover;
+      box-shadow: 0 6px 20px rgba(30,15,5,.12);
+      transition: transform .8s var(--ease-lux), box-shadow .8s var(--ease-lux);
+    }
+    .masonry-col img:hover { transform: scale(1.03); box-shadow: 0 14px 36px rgba(30,15,5,.2); }
+
     /* ── PLANS (取引形態) ── */
     .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 88px; max-width: 780px; margin-left: auto; margin-right: auto; }
     .plan-card {
@@ -582,6 +638,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .masonry-col { animation: none !important; }
     }
 
     /* ── Responsive ── */
@@ -597,6 +654,7 @@
       .flow-step { gap: 20px; padding: 26px 0; }
       .flow-num { width: 40px; font-size: 1.8rem; }
       .btn { padding: 18px 40px; letter-spacing: .24em; }
+      .masonry-outer { height: 420px; }
     }
   </style>
 </head>
@@ -753,7 +811,106 @@
   </section>
 
 
-  <!-- ═══════════ ④ PLANS（取引形態） ═══════════ -->
+  <!-- ═══════════ ④ GALLERY（制作例ギャラリー） ═══════════ -->
+  <section class="gallery-section" aria-label="制作例ギャラリー">
+    <div class="container">
+      <span class="label label--white fade-up">Gallery</span>
+      <div class="ornament fade-up delay-1" style="--tan-dark: rgba(255,255,255,.38);">
+        <div class="ornament-diamond" style="background:rgba(255,255,255,.38);"></div>
+      </div>
+      <h2 class="section-title section-title--white fade-up delay-2">
+        制作例ギャラリー
+      </h2>
+      <p class="gallery-lead fade-up delay-3">
+        ウエディング・バースデー・マタニティフォトなど、<br>
+        これまでにお届けした制作例の一部をご紹介します。
+      </p>
+    </div>
+
+    <div class="masonry-outer">
+      <div class="masonry-track">
+        <!-- col 1 (10 unique) -->
+        <div class="masonry-col">
+          <picture><source srcset="images/webp/AF62A4D7-4936-40CD-A49C-6EF85D527675.webp" type="image/webp"><img src="images/original/AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg" alt="Felice のクレイケーキ制作実例｜ウエディング向けフェイクケーキ" width="1600" height="1201" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.webp" type="image/webp"><img src="images/original/49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.jpg" alt="クレイケーキ制作実績｜Felice オーダーメイド作品" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/C9D753F9-B537-4319-9048-CC3AE9D389EC.webp" type="image/webp"><img src="images/original/C9D753F9-B537-4319-9048-CC3AE9D389EC.jpg" alt="フェイクケーキ制作例｜記念日フォト用ディスプレイ" width="900" height="1350" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.webp" type="image/webp"><img src="images/original/1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.jpg" alt="サンプルケーキ制作例｜撮影用ディスプレイ" width="900" height="1350" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/S__29360139.webp" type="image/webp"><img src="images/original/S__29360139.jpg" alt="フェイクフルーツ装飾例｜フォトスタジオ小物" width="900" height="1198" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_1.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_1.jpg" alt="クレイケーキ制作例｜オーダーメイドフェイクケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_5.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_5.jpg" alt="ウエディングケーキ制作例｜クレイ造形" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_4.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_4.jpg" alt="ウエディング装飾用クレイケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_5.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_5.jpg" alt="ブライダル用フェイクケーキ制作実例" width="900" height="676" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_2.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_2.jpg" alt="ウエディングクレイケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <!-- duplicate for loop -->
+          <picture><source srcset="images/webp/AF62A4D7-4936-40CD-A49C-6EF85D527675.webp" type="image/webp"><img src="images/original/AF62A4D7-4936-40CD-A49C-6EF85D527675.jpg" alt="Felice のクレイケーキ制作実例｜ウエディング向けフェイクケーキ" width="1600" height="1201" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.webp" type="image/webp"><img src="images/original/49DC7FCA-00A7-41A6-9B98-FD62F042FA0A.jpg" alt="クレイケーキ制作実績｜Felice オーダーメイド作品" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/C9D753F9-B537-4319-9048-CC3AE9D389EC.webp" type="image/webp"><img src="images/original/C9D753F9-B537-4319-9048-CC3AE9D389EC.jpg" alt="フェイクケーキ制作例｜記念日フォト用ディスプレイ" width="900" height="1350" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.webp" type="image/webp"><img src="images/original/1488C032-1AB4-4A9C-B1A5-8A62ECC1CB80.jpg" alt="サンプルケーキ制作例｜撮影用ディスプレイ" width="900" height="1350" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/S__29360139.webp" type="image/webp"><img src="images/original/S__29360139.jpg" alt="フェイクフルーツ装飾例｜フォトスタジオ小物" width="900" height="1198" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_1.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_1.jpg" alt="クレイケーキ制作例｜オーダーメイドフェイクケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_5.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_5.jpg" alt="ウエディングケーキ制作例｜クレイ造形" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_4.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_4.jpg" alt="ウエディング装飾用クレイケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_5.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_5.jpg" alt="ブライダル用フェイクケーキ制作実例" width="900" height="676" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_2.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_2.jpg" alt="ウエディングクレイケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+        </div>
+        <!-- col 2 (10 unique) -->
+        <div class="masonry-col">
+          <picture><source srcset="images/webp/BF62B532-0284-47EA-8FA2-7EE608922D63.webp" type="image/webp"><img src="images/original/BF62B532-0284-47EA-8FA2-7EE608922D63.jpg" alt="クレイケーキ制作例｜撮影小物" width="900" height="676" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/B71941BF-9991-46FB-9FD8-FB736652465C.webp" type="image/webp"><img src="images/original/B71941BF-9991-46FB-9FD8-FB736652465C.jpg" alt="オーダーメイドクレイケーキ制作実例" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/A7E31EED-A5C1-42FB-BC82-48C70A947250.webp" type="image/webp"><img src="images/original/A7E31EED-A5C1-42FB-BC82-48C70A947250.jpg" alt="記念日用フェイクケーキ｜Felice 制作例" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/21A632EE-0AC2-4FE7-BD93-2260366D91C1.webp" type="image/webp"><img src="images/original/21A632EE-0AC2-4FE7-BD93-2260366D91C1.jpg" alt="マタニティフォト用クレイケーキ" width="900" height="1200" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_2.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_2.jpg" alt="クレイケーキ制作例｜ディスプレイ用" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_6.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_6.jpg" alt="バースデークレイケーキ制作例" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_7.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_7.jpg" alt="オーダーメイドフェイクケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_9.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_9.jpg" alt="撮影用クレイケーキ｜フォトスタジオ小物" width="900" height="677" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_1.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_1.jpg" alt="ウエディング用クレイケーキ制作例" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_3.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_3.jpg" alt="ブライダル装飾用クレイケーキ" width="900" height="668" loading="lazy" decoding="async"></picture>
+          <!-- duplicate for loop -->
+          <picture><source srcset="images/webp/BF62B532-0284-47EA-8FA2-7EE608922D63.webp" type="image/webp"><img src="images/original/BF62B532-0284-47EA-8FA2-7EE608922D63.jpg" alt="クレイケーキ制作例｜撮影小物" width="900" height="676" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/B71941BF-9991-46FB-9FD8-FB736652465C.webp" type="image/webp"><img src="images/original/B71941BF-9991-46FB-9FD8-FB736652465C.jpg" alt="オーダーメイドクレイケーキ制作実例" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/A7E31EED-A5C1-42FB-BC82-48C70A947250.webp" type="image/webp"><img src="images/original/A7E31EED-A5C1-42FB-BC82-48C70A947250.jpg" alt="記念日用フェイクケーキ｜Felice 制作例" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/21A632EE-0AC2-4FE7-BD93-2260366D91C1.webp" type="image/webp"><img src="images/original/21A632EE-0AC2-4FE7-BD93-2260366D91C1.jpg" alt="マタニティフォト用クレイケーキ" width="900" height="1200" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_2.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_2.jpg" alt="クレイケーキ制作例｜ディスプレイ用" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_6.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_6.jpg" alt="バースデークレイケーキ制作例" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_7.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_7.jpg" alt="オーダーメイドフェイクケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_9.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_9.jpg" alt="撮影用クレイケーキ｜フォトスタジオ小物" width="900" height="677" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_1.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_1.jpg" alt="ウエディング用クレイケーキ制作例" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ウェディング系_260403_3.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ウェディング系_260403_3.jpg" alt="ブライダル装飾用クレイケーキ" width="900" height="668" loading="lazy" decoding="async"></picture>
+        </div>
+        <!-- col 3 (10 unique) -->
+        <div class="masonry-col">
+          <picture><source srcset="images/webp/BD413E89-8AC9-4EF4-BC37-9E172D2649BA.webp" type="image/webp"><img src="images/original/BD413E89-8AC9-4EF4-BC37-9E172D2649BA.jpg" alt="クレイケーキ制作実例" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/C345F8F3-2243-4224-970F-8B79F7663596.webp" type="image/webp"><img src="images/original/C345F8F3-2243-4224-970F-8B79F7663596.jpg" alt="フェイクケーキ・ディスプレイ制作例" width="900" height="1198" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.webp" type="image/webp"><img src="images/original/FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.jpg" alt="クレイケーキオーダー実例｜撮影小物" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/94EF2D33-F990-472C-913D-A5C52B54AF7A.webp" type="image/webp"><img src="images/original/94EF2D33-F990-472C-913D-A5C52B54AF7A.jpg" alt="バースデー用クレイケーキ｜誕生日フォト" width="900" height="1350" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.webp" type="image/webp"><img src="images/original/C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.jpg" alt="サンプルケーキ制作例" width="900" height="678" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.webp" type="image/webp"><img src="images/original/01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.jpg" alt="フォトスタジオ小物用クレイケーキ" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/S__253698064.webp" type="image/webp"><img src="images/original/S__253698064.jpg" alt="オーダーメイドクレイケーキ" width="900" height="1240" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_4.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_4.jpg" alt="フォト撮影用クレイケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_8.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_8.jpg" alt="フェイクケーキ制作例｜マタニティフォト小物" width="900" height="690" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_10.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_10.jpg" alt="クレイケーキ制作実例｜オーダーメイド" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <!-- duplicate for loop -->
+          <picture><source srcset="images/webp/BD413E89-8AC9-4EF4-BC37-9E172D2649BA.webp" type="image/webp"><img src="images/original/BD413E89-8AC9-4EF4-BC37-9E172D2649BA.jpg" alt="クレイケーキ制作実例" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/C345F8F3-2243-4224-970F-8B79F7663596.webp" type="image/webp"><img src="images/original/C345F8F3-2243-4224-970F-8B79F7663596.jpg" alt="フェイクケーキ・ディスプレイ制作例" width="900" height="1198" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.webp" type="image/webp"><img src="images/original/FE64DA0A-0CEF-4E55-A749-EB86EA77BA2B.jpg" alt="クレイケーキオーダー実例｜撮影小物" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/94EF2D33-F990-472C-913D-A5C52B54AF7A.webp" type="image/webp"><img src="images/original/94EF2D33-F990-472C-913D-A5C52B54AF7A.jpg" alt="バースデー用クレイケーキ｜誕生日フォト" width="900" height="1350" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.webp" type="image/webp"><img src="images/original/C36E321A-1B93-4B59-91CF-E4C73A8EFEC0.jpg" alt="サンプルケーキ制作例" width="900" height="678" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.webp" type="image/webp"><img src="images/original/01C04A25-0D2F-4AB3-A84F-8F31BCA991D1.jpg" alt="フォトスタジオ小物用クレイケーキ" width="900" height="600" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/S__253698064.webp" type="image/webp"><img src="images/original/S__253698064.jpg" alt="オーダーメイドクレイケーキ" width="900" height="1240" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_4.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_4.jpg" alt="フォト撮影用クレイケーキ" width="900" height="675" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_8.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_8.jpg" alt="フェイクケーキ制作例｜マタニティフォト小物" width="900" height="690" loading="lazy" decoding="async"></picture>
+          <picture><source srcset="images/webp/LINE_ALBUM_ケーキ_260403_10.webp" type="image/webp"><img src="images/original/LINE_ALBUM_ケーキ_260403_10.jpg" alt="クレイケーキ制作実例｜オーダーメイド" width="900" height="675" loading="lazy" decoding="async"></picture>
+        </div>
+      </div>
+    </div>
+
+    <p class="gallery-note fade-up">
+      最新の制作例は Instagram（<a href="https://www.instagram.com/felice.fakecake" target="_blank" rel="noopener">@felice.fakecake</a>）でもご覧いただけます。
+    </p>
+  </section>
+
+
+  <!-- ═══════════ ⑤ PLANS（取引形態） ═══════════ -->
   <section class="section section-white">
     <div class="container">
       <span class="label fade-up">Business Plans</span>
@@ -806,7 +963,7 @@
   </section>
 
 
-  <!-- ═══════════ ⑤ FLOW（お取引の流れ） ═══════════ -->
+  <!-- ═══════════ ⑥ FLOW（お取引の流れ） ═══════════ -->
   <section class="section section-ultra">
     <div class="container">
       <span class="label fade-up">Flow</span>
@@ -857,7 +1014,7 @@
   </section>
 
 
-  <!-- ═══════════ ⑥ FAQ ═══════════ -->
+  <!-- ═══════════ ⑦ FAQ ═══════════ -->
   <section class="section section-white" aria-labelledby="faq-title">
     <div class="container">
       <span class="label fade-up">FAQ</span>
@@ -915,7 +1072,7 @@
   </section>
 
 
-  <!-- ═══════════ ⑦ CONTACT ═══════════ -->
+  <!-- ═══════════ ⑧ CONTACT ═══════════ -->
   <section id="contact" class="contact-section">
     <div class="container">
       <span class="label label--white fade-up">Contact</span>
