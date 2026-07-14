@@ -1,0 +1,15 @@
+{
+  "name": "Felice 書類づくり",
+  "short_name": "Felice書類",
+  "description": "見積書・請求書・納品書・領収書をつくって、PDFでそのまま送れます。データはこの端末の中だけに保存されます。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fdfbf7",
+  "theme_color": "#fdfbf7",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
