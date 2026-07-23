@@ -539,13 +539,13 @@ svg.ic { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-wid
 .s-greet { font-size: 9.5pt; margin: 4mm 0 4mm; }
 
 .s-amount {
-  display: flex; align-items: baseline; gap: 4mm;
+  display: flex; align-items: baseline; gap: 3mm; flex-wrap: nowrap;
   border: 1.4pt solid #c9a96a; border-radius: 1.5mm;
-  padding: 3mm 5mm; background: #fdfaf3;
+  padding: 3mm 4mm; background: #fdfaf3;
 }
-.s-amount-label { font-size: 10pt; letter-spacing: .3em; }
-.s-amount-val { font-size: 17pt; font-weight: 600; letter-spacing: .04em; flex: 1; text-align: center; }
-.s-amount-tax { font-size: 8.5pt; color: #55402e; }
+.s-amount-label { font-size: 10pt; letter-spacing: .3em; white-space: nowrap; flex: none; }
+.s-amount-val { font-size: 17pt; font-weight: 600; letter-spacing: .04em; flex: 1; text-align: center; white-space: nowrap; }
+.s-amount-tax { font-size: 8.5pt; color: #55402e; white-space: nowrap; flex: none; }
 .s-terms { font-size: 9.5pt; margin-top: 3mm; }
 .s-terms b { font-weight: 600; }
 
@@ -577,7 +577,7 @@ table.s-items { width: 100%; border-collapse: collapse; margin-top: 2mm; font-si
 .s-items tfoot td {
   border-bottom: none; padding: 2mm 2.5mm;
 }
-.s-items tfoot .t-label { text-align: right; letter-spacing: .25em; font-size: 9.5pt; }
+.s-items tfoot .t-label { text-align: right; letter-spacing: .25em; font-size: 9.5pt; white-space: nowrap; }
 .s-items tfoot .t-val { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .s-items tfoot tr.sub td { border-top: .8pt solid #2e1f14; }
 .s-items tfoot tr.grand td {
@@ -612,6 +612,7 @@ table.s-items { width: 100%; border-collapse: collapse; margin-top: 2mm; font-si
   border: 2pt solid #c9a96a; border-radius: 2mm;
   background: #fdfaf3;
   text-align: center; padding: 6mm 4mm;
+  white-space: nowrap; /* 金額と（税込）を必ず同じ行に */
 }
 .sheet.st-receipt .s-amount-big .lbl { font-size: 10pt; letter-spacing: .5em; color: #8a6f42; display: block; }
 .sheet.st-receipt .s-amount-big .val { font-size: 26pt; font-weight: 600; letter-spacing: .05em; }
