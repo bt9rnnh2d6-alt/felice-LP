@@ -3,7 +3,7 @@
    ユーザーデータは扱わない（localStorage側）。 */
 'use strict';
 
-const CACHE = 'felice-billing-v1';
+const CACHE = 'felice-billing-v2';
 const FONT_CACHE = 'felice-billing-fonts-v1';
 const ASSETS = [
   './',

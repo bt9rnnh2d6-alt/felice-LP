@@ -753,17 +753,41 @@ function mountPreview(container, doc){
 }
 window.addEventListener('resize', () => $$('.preview-wrap').forEach(fitPreview));
 
-/* ═══ PDF 生成・共有 ═══ */
-function pdfFileName(d){
-  return sanitizeFile(`${DOC_TYPES[d.type].label}_${d.number}_${d.customerName}`) + '.pdf';
+/* ═══ ファイル書き出し（PDF・JPG・PNG）・共有 ═══ */
+const EXPORT_FORMATS = {
+  pdf: { label:'PDF',    ext:'pdf', mime:'application/pdf', desc:'正式な書類として送るならこちら', badge:'PDF', color:'#b05d4e' },
+  jpg: { label:'JPG画像', ext:'jpg', mime:'image/jpeg',      desc:'LINEで送るとそのまま開けます',   badge:'JPG', color:'#7e93a8' },
+  png: { label:'PNG画像', ext:'png', mime:'image/png',       desc:'文字がくっきり、きれいな画像',   badge:'PNG', color:'#7f9376' },
+};
+function exportFileName(d, ext){
+  return sanitizeFile(`${DOC_TYPES[d.type].label}_${d.number}_${d.customerName}`) + '.' + ext;
+}
+let stageQueue = Promise.resolve(); /* #pdf-stage は1つなので描画を直列化（連打対策） */
+function makeSheetCanvas(d, scale = 2){
+  const run = async () => {
+    const stage = $('#pdf-stage');
+    stage.innerHTML = sheetHTML(d);
+    const el = stage.firstElementChild;
+    try { await document.fonts.ready; } catch {}
+    const canvas = await html2canvas(el, { scale, backgroundColor: '#ffffff', logging: false });
+    stage.innerHTML = '';
+    return canvas;
+  };
+  const p = stageQueue.then(run, run);
+  stageQueue = p.catch(() => {});
+  return p;
+}
+function canvasToBlob(canvas, mime, quality){
+  return new Promise((resolve, reject) =>
+    canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), mime, quality));
+}
+async function makeExportBlob(d, fmt){
+  if (fmt === 'pdf') return makePdfBlob(d);
+  const canvas = await makeSheetCanvas(d, 2);
+  return canvasToBlob(canvas, EXPORT_FORMATS[fmt].mime, fmt === 'jpg' ? 0.92 : undefined);
 }
 async function makePdfBlob(d){
-  const stage = $('#pdf-stage');
-  stage.innerHTML = sheetHTML(d);
-  const el = stage.firstElementChild;
-  try { await document.fonts.ready; } catch {}
-  const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff', logging: false });
-  stage.innerHTML = '';
+  const canvas = await makeSheetCanvas(d, 2);
   const pdf = new jspdf.jsPDF({ unit: 'mm', format: 'a4', compress: true });
   const pageW = 210, pageH = 297;
   const pagePx = Math.floor(canvas.width * pageH / pageW);
@@ -799,45 +823,61 @@ function markIssued(d){
     toast('この書類を「発行済み」にしました');
   }
 }
-async function sharePdf(d, btn){
+async function shareDoc(d, fmt, btn){
+  const f = EXPORT_FORMATS[fmt];
   if (btn) { btn.disabled = true; }
-  toast('PDFをつくっています…', 1600);
+  toast(`${f.label}をつくっています…`, 1600);
   try {
-    const blob = await makePdfBlob(d);
-    const file = new File([blob], pdfFileName(d), { type: 'application/pdf' });
+    const blob = await makeExportBlob(d, fmt);
+    const name = exportFileName(d, f.ext);
+    const file = new File([blob], name, { type: f.mime });
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title: pdfFileName(d) });
+        await navigator.share({ files: [file], title: name });
         markIssued(d);
       } catch (e) {
-        if (e && e.name !== 'AbortError') { downloadBlob(blob, pdfFileName(d)); markIssued(d); }
+        if (e && e.name !== 'AbortError') { downloadBlob(blob, name); markIssued(d); }
       }
     } else {
-      downloadBlob(blob, pdfFileName(d));
-      toast('PDFを保存しました');
+      downloadBlob(blob, name);
+      toast(`${f.label}を保存しました`);
       markIssued(d);
     }
   } catch (e) {
     console.error(e);
-    toast('PDFの作成に失敗しました');
+    toast(`${f.label}の作成に失敗しました`);
   } finally {
     if (btn) btn.disabled = false;
   }
 }
-async function downloadPdf(d){
-  toast('PDFをつくっています…', 1600);
+async function downloadDoc(d, fmt){
+  const f = EXPORT_FORMATS[fmt];
+  toast(`${f.label}をつくっています…`, 1600);
   try {
-    const blob = await makePdfBlob(d);
-    downloadBlob(blob, pdfFileName(d));
-    toast('PDFを保存しました');
+    const blob = await makeExportBlob(d, fmt);
+    downloadBlob(blob, exportFileName(d, f.ext));
+    toast(`${f.label}を保存しました`);
     markIssued(d);
-  } catch (e) { console.error(e); toast('PDFの作成に失敗しました'); }
+  } catch (e) { console.error(e); toast(`${f.label}の作成に失敗しました`); }
+}
+function openExportSheet(d, mode){
+  openActionSheet(mode === 'share' ? 'どの形でお渡ししますか？' : 'どの形でダウンロードしますか？',
+    Object.entries(EXPORT_FORMATS).map(([k, f]) => `
+      <button class="as-btn" data-fmt="${k}">
+        <span class="dot txt" style="background:${f.color}">${f.badge}</span>
+        <span class="as-txt"><b>${f.label}</b><em>${f.desc}</em></span>
+      </button>`).join(''));
+  $$('#asheet [data-fmt]').forEach(b => b.addEventListener('click', () => {
+    closeActionSheet();
+    if (mode === 'share') shareDoc(d, b.dataset.fmt);
+    else downloadDoc(d, b.dataset.fmt);
+  }));
 }
 function printDoc(d){
   const stage = $('#print-stage');
   stage.innerHTML = sheetHTML(d);
   const before = document.title;
-  document.title = pdfFileName(d).replace(/\.pdf$/, '');
+  document.title = exportFileName(d, 'pdf').replace(/\.pdf$/, '');
   window.print();
   document.title = before;
   setTimeout(() => { stage.innerHTML = ''; }, 800);
@@ -879,7 +919,7 @@ function openDetail(id){
   openOverlay('detail');
 }
 $('#detail-back').addEventListener('click', requestCloseOverlay);
-$('#btn-share').addEventListener('click', e => { const d = docById(detailId); if (d) sharePdf(d, e.currentTarget); });
+$('#btn-share').addEventListener('click', () => { const d = docById(detailId); if (d) openExportSheet(d, 'share'); });
 
 $('#btn-convert').addEventListener('click', () => {
   const d = docById(detailId);
@@ -928,7 +968,7 @@ $('#detail-menu').addEventListener('click', () => {
   openActionSheet(`${DOC_TYPES[d.type].label}　${d.number}`, `
     <button class="as-btn" data-act="edit">${ICONS.edit.replace('<svg', '<svg class="ic"')}内容を編集する</button>
     <button class="as-btn" data-act="dup">${ICONS.copy.replace('<svg', '<svg class="ic"')}複製して新しくつくる</button>
-    <button class="as-btn" data-act="dl">${ICONS.download.replace('<svg', '<svg class="ic"')}PDFをダウンロード</button>
+    <button class="as-btn" data-act="dl">${ICONS.download.replace('<svg', '<svg class="ic"')}ダウンロード（PDF・画像）</button>
     <button class="as-btn" data-act="print">${ICONS.print.replace('<svg', '<svg class="ic"')}印刷する<small>パソコン向け</small></button>
     <button class="as-btn danger" data-act="del">${ICONS.trash.replace('<svg', '<svg class="ic"')}この書類を削除する</button>
   `);
@@ -937,7 +977,7 @@ $('#detail-menu').addEventListener('click', () => {
     const act = b.dataset.act;
     if (act === 'edit') { requestCloseOverlay(); setTimeout(() => startWizard({ mode: 'edit', doc: d }), 400); }
     if (act === 'dup') duplicateDoc(d);
-    if (act === 'dl') downloadPdf(d);
+    if (act === 'dl') { setTimeout(() => openExportSheet(d, 'download'), 250); }
     if (act === 'print') printDoc(d);
     if (act === 'del') {
       if (await ask(`${DOC_TYPES[d.type].label}「${d.number}」を削除しますか？\nこの操作は元に戻せません。`, '削除する')) {
